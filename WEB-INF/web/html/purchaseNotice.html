@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div>
+	<table class="dataTable">
+		<thead>
+			<tr>
+				<td width="27%">项目名称</td>
+				<td width="5%">项目预算</td>
+				<td width="14%">投标文件时间</td>
+				<td width="7%">开标时间</td>
+				<td width="15%">采购单位</td>
+				<td width="17%">地址</td>
+				<td width="6%">联系人</td>
+				<td width="8%">联系电话</td>
+			</tr>
+		</thead>
+		<tbody id="tbody">
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+let pageType = 'purchaseNotice';
+pageObj.type=pageType;
+pageObj.fillData=function(node, datas){
+	$(node).empty();
+	for(var i=0;i<datas.length;i++){
+		var data=JSON.parse(datas[i]);
+		var color=i%2==0?'#fafafa':'#ddddff';
+		$(node).append('<tr><td>'
+			+'<a href='+data.url+' target="_blank" style="color:#111111;font-weight:bold;">'+data.name+'</a></td>'
+			+'<td>'+data.budget+'</td>'+'<td>'+data.submitTime+'</td>'
+			+'<td>'+data.openTime+'</td>'+'<td>'+data.purchaser+'</td>'
+			+'<td>'+data.address+'</td>'+'<td>'+data.contacts+'</td>'
+			+'<td>'+data.phoneNo+'</td></tr>');
+	}
+}
+
+refreshData();
+startInterval();
+</script>

@@ -1,0 +1,61 @@
+.mainDiv{
+display:inline;
+float:left;
+margin-top:10px;
+border:2px solid #cdcdff;
+text-align:center;
+}
+.menuDiv{
+height:35px;
+cursor:pointer;
+line-height:33px;
+}
+
+.dataTable{
+	width:100%;
+	border:2px solid #cdcdff;
+	/*table-layout:fixed;*/
+}
+.dataTable thead{
+	background-color:#aaaaff;
+	border-bottom:#e3e3e3 solid 2px; 
+	text-align:center; 
+	font-size:16px;
+	padding:10px 0px;
+}
+.dataTable tr{
+	height:30px;
+}
+.dataTable tbody tr:hover{
+	background-color:#ccccff;
+}
+.dataTable tbody td{
+	border-bottom:#e3e3e3 solid 1px;
+	border-right:#e3e3e3 solid 1px;
+	text-align:center; 
+	font-size:14px; 
+	padding:3px 6px;
+	/*overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	word-break:keep-all;*/
+}
+.dataTable a{ color:#3085be; text-decoration:none;}
+.dataTable a:hover{ color:#1e628f; text-decoration:underline;}
+#headDiv{
+	height:30px;
+	background-color:#cdcdff;
+	line-height:30px;
+}
+#actionDiv{
+	display:inline;
+	float:left;
+}
+#pageDiv{
+	display:inline;
+	float:right;
+}
+#pageDiv span{
+	margin-left:5px;
+}
+#pageDiv span a:hover{ background-color:#6666ff; color:#FFF;}

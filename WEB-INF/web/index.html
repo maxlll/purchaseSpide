@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广州公共资源交易中心</title>
+<link rel="icon" href="web/img/logo.ico" type="image/x-icon"/>
+<script type="text/javascript" src="web/js/jquery.min.js"></script>
+<script type="text/javascript" src="web/js/public.js"></script>
+<link rel="stylesheet" type="text/css" href="web/css/public.css"></link>
+</head>
+<body bgcolor="#fafafa">
+<div style="width:100%;height:35px;">
+<img src="web/img/title.png" height="40px;"/>
+</div>
+
+<div class="mainDiv" style="width:8%;">
+<div class="menuDiv" id="n1">采购公告</div>
+<div class="menuDiv" id="n2">采购结果公告</div>
+<div class="menuDiv" id="n3">协议供货</div>
+<div class="menuDiv" id="n4">电子商城订单</div>
+<div class="menuDiv" id="n5">竞价公告</div>
+<div class="menuDiv" id="n6">竞价结果公告</div>
+<div class="menuDiv"></div>
+<div class="menuDiv" id="config">配置页</div>
+</div>
+
+<div class="mainDiv" style="width:91%;margin-left:5px;height:100%;">
+<div id="headDiv">
+<div id="actionDiv">
+<button id="exportButton" style="height:28px;">导出到Excel</button>
+<select id="exportSelect" style="height:25px;">
+</select>
+</div>
+<div id="pageDiv"></div>
+</div>
+<div id="right"></div>
+</div>
+<script type="text/javascript">
+var locate = 
+{"n1":"web/html/purchaseNotice.html","n2":"web/html/purchaseResult.html",
+		"n3":"web/html/supplyNotice.html","n4":"web/html/emallOrder.html",
+		"n5":"web/html/bidNotice.html","n6":"web/html/bidResult.html","config":"web/html/config.html"};
+
+var color0='#ddddff';
+var color1='#f1f1ff';
+var clickColor='#aaaadd';
+var hoverColor='#bbbbff';
+var prevColor='';
+var menuDiv=$('div .menuDiv');
+var curDivId='';
+var curMenu='';
+var addMenuHoverAndClick=function(){
+	for(var i=0;i<menuDiv.length;i++){
+		$(menuDiv[i]).click(function(){
+			page={pageNo:1,pageSize:10};
+			$('#right').load(locate[this.id]);
+			curDivId = this.id;
+			curMenu = $(this).html();
+			colorChange();
+		});
+		
+		var color = i%2==0?color0:color1;
+		$(menuDiv[i]).css('background-color', color);
+		$(menuDiv[i]).hover(
+			function(){
+				if(this.id!=curDivId){
+					prevColor=$(this).css('background-color');
+					$(this).css('background-color', hoverColor);
+				}
+			},
+			function(){
+				if(this.id!=curDivId){
+					$(this).css('background-color', prevColor);
+				}
+			}
+		);
+	}
+}
+addMenuHoverAndClick();
+var colorChange=function(){
+	for(var i=0;i<menuDiv.length;i++){
+		if($(menuDiv[i]).attr('id')==curDivId){
+			$(menuDiv[i]).css('background-color', clickColor);
+		}else{
+			var color = i%2==0?color0:color1;
+			$(menuDiv[i]).css('background-color', color);
+		}
+	}
+}
+
+$('#n1').click();
+</script>
+</body>
+</html>

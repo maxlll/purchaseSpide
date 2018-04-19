@@ -1,0 +1,67 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div>
+	<table class="dataTable">
+		<thead>
+			<tr>
+				<td width="40%">配置项名称</td>
+				<td width="60%">配置值</td>
+			</tr>
+		</thead>
+		<tbody id="tbody">
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+$('#headDiv').hide();
+if(interval){
+	clearInterval(interval);
+}
+
+var fillData=function(node, datas){
+	$(node).empty();
+	for(var i=0;i<datas.length;i++){
+		var data=datas[i];
+		var color=i%2==0?'#fafafa':'#ddddff';
+		var tr = $('<tr style="height:35px;background-color:'+color+'"><td>'
+				+'<input type="hidden" value="'+data.key+'" name="key">'+data.name+'</td>'
+				+'<td><input type="text" value="'+data.value+'" name="value" style="text-align:center;width:80%;height:30px;"/></td></tr>');
+		$(tr).change(function(){
+			let key = $(this).find('input[name="key"]').val();
+			let value = $(this).find('input[name="value"]').val();
+			$.ajax({
+				type: "PUT",
+		        url: "data/config?key="+key+"&value="+encodeURI(value),
+		        dataType: "json",
+		        success: function(result){
+		        	if(result){
+		        		alert('更新成功');
+		        		queryConfig();
+		        	}else{
+		        		alert('更新失败');
+		        	}
+		        },
+		        error: function(e){
+		        	alert('更新失败');
+		        }
+			});
+		});
+		$(node).append(tr);
+	}
+}
+
+var queryConfig=function(){
+	$.ajax({
+		type: "GET",
+        url: "data/config?t="+new Date().getTime(),
+        dataType: "json",
+        success: function(result){
+        	if(result){
+        		fillData($('#tbody'), result);
+        	}
+        },
+        error: function(e){
+        }
+	});
+}
+queryConfig();
+</script>

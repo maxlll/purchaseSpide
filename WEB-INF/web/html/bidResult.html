@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<div>
+	<table class="dataTable">
+		<thead>
+			<tr>
+				<td width="30%">项目名称</td>
+				<td width="25%">成交供应商</td>
+				<td width="30%">本项目采购人</td>
+				<td width="15%">成交时间</td>
+			</tr>
+		</thead>
+		<tbody id="tbody">
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+let pageType = 'bidResult';
+pageObj.type=pageType;
+pageObj.fillData=function(node, datas){
+	$(node).empty();
+	for(var i=0;i<datas.length;i++){
+		var data=JSON.parse(datas[i]);
+		var color=i%2==0?'#fafafa':'#ddddff';
+		$(node).append('<tr><td>'
+			+'<a href='+data.url+' target="_blank" style="color:#111111;font-weight:bold;">'+data.name+'</a></td>'
+			+'<td>'+data.supplier+'</td>'+'<td>'+data.purchaser+'</td>'
+			+'<td>'+data.date+'</td></tr>');
+	}
+}
+
+refreshData();
+startInterval();
+</script>
